@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Lightup by Jianru-Lin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Lightup</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/Jianru-Lin/Lightup">View the Project on GitHub <small>Jianru-Lin/Lightup</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Jianru-Lin/Lightup/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Jianru-Lin/Lightup/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Jianru-Lin/Lightup">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="lightup-%E7%AE%80%E6%B4%81%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%BA%A7-c-%E5%BA%93" class="anchor" href="#lightup-%E7%AE%80%E6%B4%81%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%BA%A7-c-%E5%BA%93"><span class="octicon octicon-link"></span></a>Lightup-简洁的系统级 C++ 库</h1>
+
+<h2>
+<a name="%E7%AE%80%E4%BB%8B" class="anchor" href="#%E7%AE%80%E4%BB%8B"><span class="octicon octicon-link"></span></a>简介</h2>
+
+<p>Lightup 是一个针对 Windows 平台的 C++ 库，它将 Windows 底层服务进行了现代化的封装，使你仅需使用少量代码就能调用各项强大的系统功能。</p>
+
+<p>和传统的 MFC 之类的 C++ 库不同，Lightup 并不是以框架为导向的重量级库，因此没有复杂的继承链，文件依赖关系也非常简单。Lightup 的目标并不是要取代其他 C++ 库，而是作为你工具箱里的一个有益的补充，加速你的软件开发。</p>
+
+<h2>
+<a name="%E5%B0%86%E7%B9%81%E7%90%90%E5%8F%98%E7%AE%80%E5%8D%95" class="anchor" href="#%E5%B0%86%E7%B9%81%E7%90%90%E5%8F%98%E7%AE%80%E5%8D%95"><span class="octicon octicon-link"></span></a>将繁琐变简单</h2>
+
+<p>Lightup 外表简单，让人感觉性格直率，但却又是心思细密的。</p>
+
+<p>例如，你只需两行代码，就可以将一个 UTF8 编码的文本文件读入为 wstring：</p>
+
+<div class="highlight highlight-cpp"><pre><span class="n">std</span><span class="o">::</span><span class="n">wstring</span> <span class="n">content</span><span class="p">;</span>
+<span class="n">FileSystem</span><span class="o">::</span><span class="n">ReadUtf8File</span><span class="p">(</span><span class="s">L"%temp%</span><span class="se">\\</span><span class="s">my_file.txt"</span><span class="p">,</span> <span class="n">content</span><span class="p">);</span> <span class="c1">// 注意文件路径中含有环境变量</span>
+</pre></div>
+
+<p>为了完成这个简单的功能，Lightup 做了以下工作：</p>
+
+<ol>
+<li>将路径中的环境变量展开——使用 <code>ExpandEnvironmentStrings()</code>
+</li>
+<li>以只读权限打开文件——使用 <code>CreateFile()</code>
+</li>
+<li>获取文件尺寸——使用 <code>GetFileSizeEx()</code>
+</li>
+<li>创建文件原始内容缓冲——使用 <code>malloc()</code>
+</li>
+<li>读入文件内容——使用 <code>ReadFile()</code>
+</li>
+<li>创建转码后缓冲——使用 <code>malloc()</code>
+</li>
+<li>将 UTF8 转为 UTF16 LE ——使用 <code>MultiByteToWideChar()</code>
+</li>
+<li>将转码后缓冲转为 std::wstring</li>
+</ol><p>在上述步骤中的任何一步，都可能出现错误。Lightup 做了认真的错误处理，因此当错误发生时，不会异常终止，并且保证资源能够被正确的释放。</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Jianru-Lin">Jianru-Lin</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
