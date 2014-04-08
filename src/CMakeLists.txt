@@ -5,8 +5,11 @@ project (Lightup)
 add_definitions(-DUNICODE -D_UNICODE)
 include_directories(../include)
 
+#test Path
+add_executable (Test-Path Path.cpp ../test/Test-Path.cpp)
+
 # test FileSystem
-add_executable (Test-FileSystem FileSystem.cpp ../test/Test-FileSystem.cpp)
+add_executable (Test-FileSystem FileSystem.cpp ../test/Test-FileSystem.cpp Path.cpp)
 
 # test Timer
 add_executable (Test-Timer Timer.cpp ../test/Test-Timer.cpp)
