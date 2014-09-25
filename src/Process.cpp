@@ -1,4 +1,13 @@
 #include "Process.h"
+
+#ifndef UNICODE
+#define UNICODE
+#endif
+
+#ifndef _UNICODE
+#define _UNICODE
+#endif
+
 #include <windows.h>
 #include <TlHelp32.h>
 #include <iostream>
@@ -65,4 +74,43 @@ FREE_1:
 	CloseHandle(h_snapshot);
 
 	return false;
+}
+
+bool Process::Run(const std::wstring &fileName)
+{
+	DWORD error = 0;
+
+	wchar_t* fileNameCopy = (wchar_t*)malloc((fileName.length() + 1) * sizeof(wchar_t)); // MARK 1
+	if (fileNameCopy == NULL) return false;
+
+	fileName.copy(fileNameCopy, fileName.length());
+	fileNameCopy[fileName.length()] = 0;
+
+	STARTUPINFO startup = { 0 };
+	startup.cb = sizeof(startup);
+	PROCESS_INFORMATION info = { 0 };
+	BOOL ret = CreateProcess(
+		NULL,
+		fileNameCopy,
+		NULL,
+		NULL,
+		FALSE,
+		0,
+		NULL,
+		NULL,
+		&startup,
+		&info);
+
+	if (ret != 0)
+	{
+		CloseHandle(info.hProcess);
+		CloseHandle(info.hThread);
+	}
+	else
+	{
+		error = GetLastError();
+	}
+
+	free(fileNameCopy);
+	return ret != 0 ? true : false;
 }
